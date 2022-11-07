@@ -13,6 +13,7 @@ for(let i = 0; i < 8; i++){
 criaTabuleiro();
 tabuleiro_inicial = inicializa_tabuleiro(tabuleiro_inicial);
 atualiza_tabuleiro(tabuleiro_inicial);
+
 selecionar_modo_jogo(tabuleiro_inicial);
 
 function pontos_partida_atualizar(tabuleiro){
@@ -104,6 +105,21 @@ function atualiza_tabuleiro(matriz_tabuleiro){ //recebe uma matriz de tabuleiro 
 }
 
 function atualiza_jogadas_validas(cor, matriz_tabuleiro, ia){ //recebe o clique no site e retorna um movimento
+    if(fim_do_jogo(black, white,matriz_tabuleiro)) {
+        let pts_final = pontos_partida(matriz_tabuleiro);
+        let vencedor = "Empate!";
+
+        if (pts_final.w > pts_final.b) {
+            vencedor = "O jogador da peça branca venceu!";
+        }
+
+        if (pts_final.b > pts_final.w) {
+            vencedor = "O jogador da peça preta venceu!";
+        }
+        document.getElementById('vez').innerHTML = vencedor;
+        return matriz_tabuleiro; 
+    }
+
     let jogadas_possiveis = jogadas_validas(cor, matriz_tabuleiro);
     
 
@@ -112,10 +128,6 @@ function atualiza_jogadas_validas(cor, matriz_tabuleiro, ia){ //recebe o clique 
     }
     else{
         prox_cor = white;
-    }
-
-    if(fim_do_jogo(white, black, matriz_tabuleiro)){
-        alert('FIM DE JOGO');
     }
 
 
@@ -129,7 +141,6 @@ function atualiza_jogadas_validas(cor, matriz_tabuleiro, ia){ //recebe o clique 
             maximizador = false;
         }
         let jogada_ia = minimax(matriz_tabuleiro, 1, cor, maximizador, 1);
-        console.log(jogada_ia)
         matriz_tabuleiro = mover_peca(cor, jogada_ia.x, jogada_ia.y, matriz_tabuleiro);
 
         setTimeout(function() {
@@ -169,8 +180,6 @@ function remover_jogadas_possiveis(){
     var jogadas_possiveis = document.getElementsByClassName('jogada-possivel');
 
     n = jogadas_possiveis.length;
-
-    console.log(jogadas_possiveis);
 
     for(let i = 0; i < n; i++){
         jogadas_possiveis[0].remove()
@@ -309,7 +318,7 @@ function esta_no_tabuleiro(x){
 }
 
 function fim_do_jogo(cor1, cor2, tabuleiro){
-    if (jogadas_validas(cor1, tabuleiro).length == 0 && jogadas_validas(cor2, tabuleiro).lenght == 0){
+    if (jogadas_validas(cor1, tabuleiro).length == 0 && jogadas_validas(cor2, tabuleiro).length == 0){
         console.log('Fim de jogo!');
         return true;
     } return false;
@@ -383,39 +392,3 @@ function minimax(tabuleiro, nivel, cor, jogador_maximizador, nivel_max){
 function criar_peca(cor){
     let peca = document.createElement('div')
 }
-
-
-
-/*
-tabuleiro_inicial = inicializa_tabuleiro(tabuleiro_inicial);
-
-let cor = white;
-let movimento = {x: 0, y: 0};
-let jogada_ia = {x: null, y:null};
-const entrada = require('prompt-sync')({sigint: true});
-
-while(!fim_do_jogo(white, black, tabuleiro_inicial)){
-    print_tabuleiro(tabuleiro_inicial);
-    console.log(pontos_partida(tabuleiro_inicial));
-
-    if(cor == black){
-        console.log(jogadas_validas(cor, tabuleiro_inicial));
-        
-        movimento.x = parseInt(entrada('digite x: '));
-        movimento.y = parseInt(entrada('digite y: '));
-
-        mover_peca(cor, movimento.x, movimento.y, tabuleiro_inicial);
-    }
-    if(cor == white){
-        jogada_ia = minimax(tabuleiro_inicial, 4, white, true, 4);
-        mover_peca(white, jogada_ia.x, jogada_ia.y, tabuleiro_inicial);
-    }
-
-    if(cor == white){3
-        cor = black;
-    }
-    else{
-        cor = white;
-    }
-}
-*/
