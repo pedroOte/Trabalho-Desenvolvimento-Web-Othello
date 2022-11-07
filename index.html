@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Othello</title>
+    <script type="text/javascript" src="script.js" charset="utf-8" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+
+  </head>
+  <body>
+    <main>
+
+        <div class="display">
+            <h1>Othello (Reversi)</h1>
+            <p class="winner"></p>
+
+        <div class="botoes" id="divBotoes" style="height: 20%; display: inline-block;">
+            <p id="instrucoes">Selecione o modo de jogo:</p>
+            <div style="display: flex; justify-content: space-between; margin: 15px;">
+                <button id="modoMaquina">1 Jogador</button>
+                <button id="modoJogador">2 Jogadores</button>
+            </div>
+        </div>
+      </div>
+      <div id="pontuacao">
+        <table>
+            <tr>
+                <td>Jogador</td>
+                <td>Pontuação</td>
+            </tr>
+            <tr>
+                <td id="jogador1">Peças pretas</td>
+                <td><span class="pontos" id="pontuacaoPretas" >2</span></td>
+            </tr>
+  
+            <tr>
+                <td id="jogador2">Peças brancas</td>
+                <td><span class="pontos" id="pontuacaoBrancas">2</span></td>
+            </tr>
+        </table>
+  </div>
+
+
+        <div class="container" style="flex-direction: row; justify-content: flex-start;">
+            <div id="tabuleiro" ></div>
+        </div>
+    </main>
+  </body>
+</html>
+
